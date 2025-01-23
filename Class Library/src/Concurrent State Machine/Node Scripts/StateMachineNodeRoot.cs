@@ -3,9 +3,9 @@ using BookWyrm.GodotExtensions;
 
 namespace BookWyrm.StateMachine
 {
-    public class StateMachineNodeRoot : Node
+    public partial class StateMachineNodeRoot : Node
     {
-        StateMachine<string, float>? Machine = null;
+        StateMachine<string, float> Machine = null;
         
         enum UpdateModeTypes { PROCESS, PHYSICS_PROCESS }
         [Export] UpdateModeTypes UpdateMode = UpdateModeTypes.PROCESS;

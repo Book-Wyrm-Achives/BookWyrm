@@ -5,9 +5,9 @@ using System;
 namespace BookWyrm.StateMachine
 {
 
-    public abstract class StateMachineNodeRoot<TData> : Node
+    public abstract partial class StateMachineNodeRoot<TData> : Node
     {
-        StateMachine<string, (float, TData)>? Machine = null;
+        StateMachine<string, (float, TData)> Machine = null;
 
         enum UpdateModeTypes { PROCESS, PHYSICS_PROCESS }
         [Export] UpdateModeTypes UpdateMode = UpdateModeTypes.PROCESS;

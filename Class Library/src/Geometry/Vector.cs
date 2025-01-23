@@ -18,7 +18,7 @@ namespace BookWyrm.Geometry
 
         public Vector()
         {
-            Components = new float[0];
+            Components = Array.Empty<float>();
         }
 
         public float this[int index]
@@ -186,7 +186,7 @@ namespace BookWyrm.Geometry
         public static Vector Up() => new Vector(0, 1);
         public static Vector Down() => new Vector(0, -1);
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (obj is Vector v)
             {

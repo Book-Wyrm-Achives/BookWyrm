@@ -2,7 +2,7 @@ using Godot;
 
 namespace BookWyrm.StateMachine
 {
-    public abstract class StateNode<TData> : Node, IState<string, (float deltaTime, TData data)>
+    public abstract partial class StateNode<TData> : Node, IState<string, (float deltaTime, TData data)>
     {
         public string GetID() => Name;
 

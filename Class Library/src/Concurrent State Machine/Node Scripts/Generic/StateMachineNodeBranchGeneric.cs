@@ -3,9 +3,9 @@ using BookWyrm.GodotExtensions;
 
 namespace BookWyrm.StateMachine
 {
-    public class StatemachineNodeBranch<TData> : StateNode<TData>
+    public partial class StatemachineNodeBranch<TData> : StateNode<TData>
     {
-        StateMachine<string, (float, TData)>? Machine = null;
+        StateMachine<string, (float, TData)> Machine = null;
 
         public override void _Ready()
         {
