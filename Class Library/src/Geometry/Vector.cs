@@ -135,6 +135,10 @@ namespace BookWyrm.Geometry
             return this - Projection(onto);
         }
 
+        public Vector Reflection(Vector over) {
+            return this - 2 * Rejection(over);
+        }
+
         public Vector Rotated2D(float angle) => Rotated(new Vector(0, 0, 1), angle);
 
         public Vector Rotated(Vector axis, float angle)
