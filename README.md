@@ -1,1 +1,1 @@
-# BookWyrm
+# BookWyrm Class Library
