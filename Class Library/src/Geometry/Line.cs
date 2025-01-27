@@ -30,26 +30,69 @@ namespace BookWyrm.Geometry
             return Vector.Dot(startDelta, Along) >= 0.0f && Vector.Dot(endDelta, Along) <= 0.0f && startDelta.Rejection(Along).SquareMagnitude() < 1e-12;
         }
 
-        public static bool Intersects(Line a, Line b, out Vector intersectionPoint, int dimensionX = 0, int dimensionY = 1, int dimensionZ = 2)
+        public static bool Intersects(Line a, Line b, out Vector intersectionPoint, int dimensionX = 0, int dimensionY = 1)
         {
-            
-
             Vector pointA = a.StartPoint;
             Vector pointB = b.StartPoint;
-            Vector directionA = a.Along.Normalized();
-            Vector directionB = b.Along.Normalized();
+            Vector directionA = a.Along;
+            Vector directionB = b.Along;
+            Vector delta = pointA - pointB;
 
-            float t = (directionB[dimensionY] * (pointA[dimensionX] - pointB[dimensionX]) - directionB[dimensionX] * (pointA[dimensionY] - pointB[dimensionY])) / (directionB[dimensionX] * directionA[dimensionY] - directionB[dimensionY] * directionA[dimensionX]);
-            float s = (pointA[dimensionX] - pointB[dimensionX] + directionA[dimensionX] * t) / directionB[dimensionX];
-        
-            intersectionPoint = pointA + directionA * t;
-            float pointDelta = pointA[dimensionZ] + directionA[dimensionZ] * t - (pointB[dimensionZ] + directionB[dimensionZ] * s);
-        
-            return pointDelta > -1e-6 && pointDelta < 1e-6;
+            float directionDot = Vector.Dot(directionA, directionB);
+            float directionDelta = (directionDot < 0 ? -directionDot : directionDot) - directionA.Magnitude() * directionB.Magnitude();
+            // Determine parallel or same line
+            if (directionDelta > -1e-6 && directionDelta < 1e-6)
+            {
+                if (a.ContainsPoint(pointB)) throw new SameLineException();
+                else throw new ParallelLineException();
+            }
+
+            Vector dirA2D = new Vector(directionA[dimensionX], directionA[dimensionY]);
+            Vector dirB2D = new Vector(directionB[dimensionX], directionB[dimensionY]);
+            int maxDimension = a.Dimension > b.Dimension ? a.Dimension : b.Dimension;
+
+            while (Vector.Cross(dirA2D, dirB2D).SquareMagnitude() < 1e-12)
+            {
+                dimensionY++;
+                if (dimensionY >= maxDimension)
+                {
+                    dimensionY = ++dimensionX + 1;
+                }
+                if(dimensionX >= maxDimension) throw new DimensionErrorException();
+
+                dirA2D = new Vector(directionA[dimensionX], directionA[dimensionY]);
+                dirB2D = new Vector(directionB[dimensionX], directionB[dimensionY]);
+            }
+
+            // B is vertical, swap A and B
+            if (dirB2D.X > -1e-6 && dirB2D.X < 1e-6)
+            {
+                pointA = b.StartPoint;
+                pointB = a.StartPoint;
+
+                directionA = b.Along;
+                directionB = a.Along;
+
+                delta = -delta;
+
+                Console.WriteLine("Swap A-B");
+            }
+
+            float t = (directionB[dimensionY] * delta[dimensionX] - directionB[dimensionX] * delta[dimensionY]) / (directionB[dimensionX] * directionA[dimensionY] - directionB[dimensionY] * directionA[dimensionX]);
+            float s = (delta[dimensionX] + directionA[dimensionX] * t) / directionB[dimensionX];
+
+            Console.WriteLine($"T: {t}, S: {s}\n");
+
+            Vector intersectA = pointA + directionA * t;
+            Vector intersectB = pointB + directionB * s;
+
+            intersectionPoint = intersectA;
+
+            return (intersectA - intersectB).SquareMagnitude() < 1e-12;
         }
 
         public class LineException : Exception { }
-        
+
         public class ParallelLineException : LineException { }
         public class SameLineException : LineException { }
         public class VerticalLineException : LineException { }

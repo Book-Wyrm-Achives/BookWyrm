@@ -106,7 +106,7 @@ namespace BookWyrm.Geometry
         {
             if (a.Dimension > 3 || b.Dimension > 3) throw new DimensionOutOfBoundsException($"Cross product is limited to at most 3 dimensional vectors. Dimensions are A: {a.Dimension} and B: {b.Dimension}");
 
-            return new Vector(a.Y * b.Z - a.Z * b.Y, a.Z * b.X - a.X * b.Z, a.X * b.Y - a.Y * b.Z);
+            return new Vector(a.Y * b.Z - a.Z * b.Y, a.Z * b.X - a.X * b.Z, a.X * b.Y - a.Y * b.X);
         }
 
         public class DimensionOutOfBoundsException : Exception { public DimensionOutOfBoundsException(string comment) : base(comment) { } }
@@ -162,12 +162,12 @@ namespace BookWyrm.Geometry
             return new Vector(components);
         }
 
-        public static Vector Zero() => new Vector();
+        public static Vector Zero => new Vector();
 
-        public static Vector Right() => new Vector(1);
-        public static Vector Left() => new Vector(-1);
-        public static Vector Up() => new Vector(0, 1);
-        public static Vector Down() => new Vector(0, -1);
+        public static Vector Right => new Vector(1);
+        public static Vector Left => new Vector(-1);
+        public static Vector Up => new Vector(0, 1);
+        public static Vector Down => new Vector(0, -1);
 
         public override bool Equals(object? obj)
         {
