@@ -3,9 +3,9 @@ using System;
 
 namespace BookWyrm.Geometry
 {
-    public class Vector
+    public struct Vector
     {
-        float[] Components;
+        public readonly float[] Components;
 
         public float X => this[0];
         public float Y => this[1];
@@ -91,7 +91,7 @@ namespace BookWyrm.Geometry
 
         public static Vector Scale(Vector a, Vector b)
         {
-            int minDimension = a.Dimension - b.Dimension;
+            int minDimension = a.Dimension < b.Dimension ? a.Dimension : b.Dimension;
 
             float[] components = new float[minDimension];
             for (int i = 0; i < minDimension; i++)
@@ -138,28 +138,7 @@ namespace BookWyrm.Geometry
         public Vector Reflection(Vector over) {
             return this - 2 * Rejection(over);
         }
-
-        public Vector Rotated2D(float angle) => Rotated(new Vector(0, 0, 1), angle);
-
-        public Vector Rotated(Vector axis, float angle)
-        {
-            if(Dimension > 3 || axis.Dimension > 3) throw new DimensionOutOfBoundsException("Rotation is limited to at most 3 dimensional vectors.");
-
-            Vector rejection = Rejection(axis);
-            Vector projection = Projection(axis);
-            Vector e1 = rejection.Normalized();
-            Vector e2 = Cross(e1, axis).Normalized();
-            Vector rot = new Vector(MathF.Cos(angle), MathF.Sin(angle));
-
-            Vector result = new Vector(
-                e1.X * rot.X + e2.X * rot.Y,
-                e1.Y * rot.X + e2.Y * rot.Y,
-                e1.Z * rot.X + e2.Z * rot.Y
-                ) * rejection.Magnitude();
-
-            return result + projection;
-        }
-
+    
         public static Vector Unit(int dimension)
         {
             float[] components = new float[dimension];
@@ -190,7 +169,7 @@ namespace BookWyrm.Geometry
         public static Vector Up() => new Vector(0, 1);
         public static Vector Down() => new Vector(0, -1);
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is Vector v)
             {
@@ -210,5 +189,17 @@ namespace BookWyrm.Geometry
         public static bool operator !=(Vector a, Vector b) => !a.Equals(b);
 
         public override int GetHashCode() => Components.GetHashCode();
+
+        public override string ToString()
+        {
+            string result = "(";
+            for (int i = 0; i < Dimension; i++)
+            {
+                result += Components[i];
+                if (i < Dimension - 1) result += ", ";
+            }
+            result += ")";
+            return result;
+        }
     }
 }
