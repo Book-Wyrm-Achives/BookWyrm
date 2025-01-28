@@ -146,7 +146,9 @@ namespace BookWyrm.Geometry
             return Rn + Projection(normal);
         }
         public Vector Rotated(Vector scaledNormal) => Rotated(scaledNormal.Magnitude(), scaledNormal);
-    
+
+        public Vector Rotated2D(float angle) => Rotated(angle, new Vector(0, 0, 1));
+
         public static Vector Unit(int dimension)
         {
             float[] components = new float[dimension];
