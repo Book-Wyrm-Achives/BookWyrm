@@ -145,6 +145,7 @@ namespace BookWyrm.Geometry
             Vector Rn = MathF.Cos(angle) * Vn + MathF.Sin(angle) * Pn;
             return Rn + Projection(normal);
         }
+        public Vector Rotated(Vector scaledNormal) => Rotated(scaledNormal.Magnitude(), scaledNormal);
     
         public static Vector Unit(int dimension)
         {
