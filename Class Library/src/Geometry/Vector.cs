@@ -138,6 +138,13 @@ namespace BookWyrm.Geometry
         public Vector Reflection(Vector over) {
             return this - 2 * Rejection(over);
         }
+
+        public Vector Rotated(float angle, Vector normal) {
+            Vector Vn = Rejection(normal);
+            Vector Pn = Cross(normal.Normalized(), Vn);
+            Vector Rn = MathF.Cos(angle) * Vn + MathF.Sin(angle) * Pn;
+            return Rn + Projection(normal);
+        }
     
         public static Vector Unit(int dimension)
         {
