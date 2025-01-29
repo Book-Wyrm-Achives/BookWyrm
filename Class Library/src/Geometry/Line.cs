@@ -91,6 +91,30 @@ namespace BookWyrm.Geometry
             return (intersectA - intersectB).SquareMagnitude() < 1e-12;
         }
 
+        public static (Vector nearestToA, Vector nearestToB, bool intersect) NearestPoint(Line a, Line b) {
+            Vector R = a.StartPoint - b.StartPoint;
+            
+            float RA = Vector.Dot(R, a.Along);
+            float RB = Vector.Dot(R, b.Along);
+            float AB = Vector.Dot(a.Along, b.Along);
+            float AA = Vector.Dot(a.Along, a.Along);
+            float BB = Vector.Dot(b.Along, b.Along);
+
+            float denom = AA * BB - AB * AB;
+
+            if(denom == 0 || AA == 0) {
+                // Parallel or same?
+            }
+
+            float t = (RB * AB + RA * BB) / denom;
+            float s = (RA + AA * t) / AB;
+
+            Vector nearestToA = a.StartPoint + a.Along * t;
+            Vector nearestToB = b.StartPoint + b.Along * s;
+
+            return (nearestToA, nearestToB, (nearestToA - nearestToB).SquareMagnitude() < 1e-12);
+        }
+
         public class LineException : Exception { }
 
         public class ParallelLineException : LineException { }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Book Wyrm Archives\\BookWyrm\\GeometryTest\\GeometryTest.csproj": {}
+    "C:\\Book Wyrm Archives\\BookWyrm\\GeometryTest\\GeometryTest.csproj": {}
   },
   "projects": {
-    "c:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj": {
+    "C:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj",
+        "projectUniqueName": "C:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj",
         "projectName": "Class Library",
-        "projectPath": "c:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj",
+        "projectPath": "C:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj",
         "packagesPath": "C:\\Users\\kylgr\\.nuget\\packages\\",
-        "outputPath": "c:\\Book Wyrm Archives\\BookWyrm\\Class Library\\obj\\",
+        "outputPath": "C:\\Book Wyrm Archives\\BookWyrm\\Class Library\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -78,14 +78,14 @@
         }
       }
     },
-    "c:\\Book Wyrm Archives\\BookWyrm\\GeometryTest\\GeometryTest.csproj": {
+    "C:\\Book Wyrm Archives\\BookWyrm\\GeometryTest\\GeometryTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Book Wyrm Archives\\BookWyrm\\GeometryTest\\GeometryTest.csproj",
+        "projectUniqueName": "C:\\Book Wyrm Archives\\BookWyrm\\GeometryTest\\GeometryTest.csproj",
         "projectName": "GeometryTest",
-        "projectPath": "c:\\Book Wyrm Archives\\BookWyrm\\GeometryTest\\GeometryTest.csproj",
+        "projectPath": "C:\\Book Wyrm Archives\\BookWyrm\\GeometryTest\\GeometryTest.csproj",
         "packagesPath": "C:\\Users\\kylgr\\.nuget\\packages\\",
-        "outputPath": "c:\\Book Wyrm Archives\\BookWyrm\\GeometryTest\\obj\\",
+        "outputPath": "C:\\Book Wyrm Archives\\BookWyrm\\GeometryTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -106,8 +106,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "c:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj": {
-                "projectPath": "c:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj"
+              "C:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj": {
+                "projectPath": "C:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj"
               }
             }
           }
