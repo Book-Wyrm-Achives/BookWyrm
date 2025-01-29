@@ -100,14 +100,15 @@ namespace BookWyrm.Geometry
             float AA = Vector.Dot(a.Along, a.Along);
             float BB = Vector.Dot(b.Along, b.Along);
 
-            float denom = AA * BB - AB * AB;
+            float determinate = AA * BB - AB * AB;
 
-            if(denom == 0 || AA == 0) {
-                // Parallel or same?
+            if(determinate == 0) {
+                if(a.ContainsPoint(b.StartPoint)) throw new SameLineException();
+                else throw new ParallelLineException();
             }
 
-            float t = (RB * AB + RA * BB) / denom;
-            float s = (RA + AA * t) / AB;
+            float t = (BB * RA - AB * RB) / determinate;
+            float s = (AB * RA - AA * RB) / determinate;
 
             Vector nearestToA = a.StartPoint + a.Along * t;
             Vector nearestToB = b.StartPoint + b.Along * s;
