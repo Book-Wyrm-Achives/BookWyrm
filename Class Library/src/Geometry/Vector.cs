@@ -135,11 +135,13 @@ namespace BookWyrm.Geometry
             return this - Projection(onto);
         }
 
-        public Vector Reflection(Vector over) {
+        public Vector Reflection(Vector over)
+        {
             return this - 2 * Rejection(over);
         }
 
-        public Vector Rotated(float angle, Vector normal) {
+        public Vector Rotated(float angle, Vector normal)
+        {
             Vector Vn = Rejection(normal);
             Vector Pn = Cross(normal.Normalized(), Vn);
             Vector Rn = MathF.Cos(angle) * Vn + MathF.Sin(angle) * Pn;
@@ -179,18 +181,12 @@ namespace BookWyrm.Geometry
         public static Vector Up => new Vector(0, 1);
         public static Vector Down => new Vector(0, -1);
 
+        private const float EQUIVALENCE_RANGE = 1e-6f;
         public override bool Equals(object? obj)
         {
             if (obj is Vector v)
             {
-                if (v.Dimension != Dimension) return false;
-
-                for (int i = 0; i < Dimension; i++)
-                {
-                    if (v[i] != this[i]) return false;
-                }
-
-                return true;
+                return (this - v).SquareMagnitude() < EQUIVALENCE_RANGE * EQUIVALENCE_RANGE;
             }
 
             return false;

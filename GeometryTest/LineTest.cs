@@ -24,34 +24,34 @@ public class LineTest
 
         // Two intersecting lines give correct intersection point
         // Two intersecting lines correctly identify if an intersection has occured
-        bool intersect = Line.Intersects(A, B, out Vector intersectionPoint);
+        bool intersect = Line.Intersect(A, B, out Vector intersectionPoint);
         Assert.IsTrue(intersect);
         float delta = (intersectionPoint - new Vector()).SquareMagnitude();
         Assert.IsTrue(delta < 1e-12);
 
         // Non Zero intersection
-        intersect = Line.Intersects(G, H, out intersectionPoint);
+        intersect = Line.Intersect(G, H, out intersectionPoint);
         Assert.IsTrue(intersect);
         delta = (intersectionPoint - new Vector(1, 1, 1)).SquareMagnitude();
         Assert.IsTrue(delta < 1e-12);
 
         // Two parallel lines throw correct exception
-        Assert.ThrowsException<Line.ParallelLineException>(() => Line.Intersects(C, D, out intersectionPoint));
-        Assert.ThrowsException<Line.SameLineException>(() => Line.Intersects(A, A, out intersectionPoint));
+        Assert.ThrowsException<Line.ParallelLineException>(() => Line.Intersect(C, D, out intersectionPoint));
+        Assert.ThrowsException<Line.SameLineException>(() => Line.Intersect(A, A, out intersectionPoint));
 
         // Works with vertical lines
-        intersect = Line.Intersects(A, V, out intersectionPoint);
+        intersect = Line.Intersect(A, V, out intersectionPoint);
         Assert.IsTrue(intersect);
         delta = (intersectionPoint - new Vector()).SquareMagnitude();
         Assert.IsTrue(delta < 1e-12);
 
-        intersect = Line.Intersects(V, A, out intersectionPoint);
+        intersect = Line.Intersect(V, A, out intersectionPoint);
         Assert.IsTrue(intersect, $"{intersectionPoint}");
         delta = (intersectionPoint - new Vector()).SquareMagnitude();
         Assert.IsTrue(delta < 1e-12);
 
         // Works with 2D parallel lines
-        intersect = Line.Intersects(E, F, out intersectionPoint);
+        intersect = Line.Intersect(E, F, out intersectionPoint);
         Assert.IsTrue(intersect);
         delta = (intersectionPoint - new Vector()).SquareMagnitude();
         Assert.IsTrue(delta < 1e-12);
