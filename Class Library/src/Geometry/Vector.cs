@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using Godot;
 
 namespace BookWyrm.Geometry
 {
@@ -207,5 +208,13 @@ namespace BookWyrm.Geometry
             result += ")";
             return result;
         }
+
+        #region Godot Conversion
+        public static implicit operator Vector2(Vector v) => new Vector2(v.X, v.Y);
+        public static implicit operator Vector3(Vector v) => new Vector3(v.X, v.Y, v.Z);
+        
+        public static implicit operator Vector(Vector2 v) => new Vector(v.X, v.Y);
+        public static implicit operator Vector(Vector3 v) => new Vector(v.X, v.Y, v.Z);
+        #endregion
     }
 }

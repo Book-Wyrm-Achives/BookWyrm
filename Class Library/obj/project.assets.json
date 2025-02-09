@@ -68,24 +68,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kylgr\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\kylgr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj",
+      "projectUniqueName": "C:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj",
       "projectName": "Class Library",
-      "projectPath": "c:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj",
+      "projectPath": "C:\\Book Wyrm Archives\\BookWyrm\\Class Library\\Class Library.csproj",
       "packagesPath": "C:\\Users\\kylgr\\.nuget\\packages\\",
-      "outputPath": "c:\\Book Wyrm Archives\\BookWyrm\\Class Library\\obj\\",
+      "outputPath": "C:\\Book Wyrm Archives\\BookWyrm\\Class Library\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
         "C:\\Users\\kylgr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -141,16 +136,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.405/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
-    }
-  ]
+  }
 }
