@@ -115,6 +115,41 @@ public class LineTest
         Assert.AreEqual(expectedIntersect, (nearestToA - nearestToB).SquareMagnitude() < 1e-12, $"Expected Intersection: {expectedIntersect}, Instead: {(nearestToA - nearestToB).SquareMagnitude() < 1e-12}");
     }
 
+    [TestMethod]
+    public void PolygonIntersectionTest()
+    {
+        Vector[] polyVerts = {
+            new Vector(100, 100),
+            new Vector(-100, 100),
+            new Vector(-100, -100),
+            new Vector(100, -100),
+        };
+
+        Vector A = new Vector(-100, 0);
+        Vector B = new Vector(0, -100);
+
+        List<Vector> intersectPoints = new List<Vector>();
+        List<int> intersectIndeces = new List<int>();
+
+        Line line = new Line(A, B);
+
+        for (int i = 0; i < polyVerts.Length; i++)
+        {
+            Line edge = new Line(polyVerts[i], polyVerts[(i + 1) % polyVerts.Length]);
+
+            if(Line.Intersect(line, edge, out Vector intersectionPoint) && edge.ContainsPoint(intersectionPoint) && line.ContainsPoint(intersectionPoint)) {
+                intersectPoints.Add(intersectionPoint);
+                intersectIndeces.Add(i);
+            }
+        }
+
+        foreach(var v in intersectPoints) { Console.WriteLine(v); }
+
+        Assert.IsTrue(intersectPoints.Count == 2, $"{intersectPoints.Count}");
+        TestByComparison(intersectPoints[0], A);
+        TestByComparison(intersectPoints[1], B);
+    }
+
     public void TestByComponents(Vector vector, params float[] components)
     {
         for (int i = 0; i < components.Length; i++)
