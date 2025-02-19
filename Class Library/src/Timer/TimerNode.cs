@@ -58,10 +58,10 @@ public partial class TimerNode : Node
     public override void _Process(double deltaTime)
     {
         if(!PauseTimer) Countdown -= (float) deltaTime;
-        Active = false;
 
         if(Active && Complete) {
             EmitSignal("OnTimerComplete");
+            Active = false;
 
             if(ResetOnCompletion) {
                 Reset();

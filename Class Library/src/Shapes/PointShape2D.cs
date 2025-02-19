@@ -1,8 +1,9 @@
 namespace BookWyrm.Shapes;
 using BookWyrm.Geometry;
 using Godot;
+using System;
 
-public class PointShape2D : Node2D
+public partial class PointShape2D : Node2D
 {
     public const string PACKEDSCENE_PATH = "res://BookWyrm/Shapes/ShapeScenes/Point.tscn";
 
