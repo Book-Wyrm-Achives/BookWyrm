@@ -9,7 +9,7 @@ public partial class InputManager : Node
     /// <summary>
     /// A path to where the default Input Scheme is stored. Used to retrieve saved control schemes.
     /// </summary>
-    private const string INPUT_SCHEME_PATH = "";
+    private const string INPUT_SCHEME_PATH = "res://Test Axes/";
     private static InputManager? Instance;
 
     private Dictionary<string, InputResource> ActiveInputs = new Dictionary<string, InputResource>();
@@ -20,6 +20,7 @@ public partial class InputManager : Node
         else QueueFree();
 
         ActiveInputs = new Dictionary<string, InputResource>();
+        LoadInputResourcesFromFolder(INPUT_SCHEME_PATH);
     }
 
     public override void _Input(InputEvent inputEvent)
@@ -35,11 +36,11 @@ public partial class InputManager : Node
     /// <returns>The current value of the InputResource</returns>
     /// <exception cref="ArrayTypeMismatchException">Throws this exception if type <typeparamref name="T"/> does not match specified input</exception>
     /// <exception cref="IndexOutOfRangeException">Throws this exception if name is not found in <see cref="ActiveInputs"/></exception>
-    public T GetInputData<T>(string name)
+    public static T GetInputData<T>(string name)
     {
-        if (ActiveInputs.ContainsKey(name))
+        if (Instance.ActiveInputs.ContainsKey(name))
         {
-            if (ActiveInputs[name] is InputResource<T> tInput) return tInput.GetData();
+            if (Instance.ActiveInputs[name] is InputResource<T> tInput) return tInput.GetData();
             else
             {
                 throw new ArrayTypeMismatchException($"Type {typeof(T)} does not match input named {name}.");
@@ -75,5 +76,19 @@ public partial class InputManager : Node
 
         Instance.ActiveInputs.Remove(inputName);
         return true;
+    }
+
+    public void LoadInputResourcesFromFolder(string folderPath) {
+        DirAccess dirAccess = DirAccess.Open(folderPath);
+
+        string[] filePaths = dirAccess.GetFiles();
+        if(filePaths == null) return;
+
+        foreach(var filePath in filePaths) {
+            InputResource input = GD.Load<InputResource>(folderPath + filePath);
+            if(input == null) continue;
+
+            RegisterInput(input);
+        }
     }
 }
